@@ -2,6 +2,7 @@
 
 namespace SoBugger.Shared.Parameters;
 
-public class UserParameters : IParameter
+public class RoleParameters : IParameter
 {
+
 }

@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace SoBugger.WebApi.Extensions
 {
     public static class AutoMapperExtensions
     {
         private static IMapper Mapper = null!;
+
         public static void Configure(IApplicationBuilder app)
         {
             Mapper = app.ApplicationServices.GetRequiredService<IMapper>();
@@ -30,19 +32,9 @@ namespace SoBugger.WebApi.Extensions
             return Mapper.ProjectTo<TDestination>(source);
         }
 
-        public static IQueryable<TDestination> MapTo<TSource, TDestination>(this IQueryable<TSource> source)
+        public static IQueryable<TOut> Map<TIn, TOut>(this IQueryable<TIn> source)
         {
-            return Mapper.ProjectTo<TDestination>(source);
-        }
-
-        public static IQueryable<TDestination> MapTo<TSource, TDestination>(this IQueryable<TSource> source, object parameters)
-        {
-            return Mapper.ProjectTo<TDestination>(source, parameters);
-        }
-
-        public static IQueryable<TDestination> MapTo<TSource, TDestination>(this IQueryable<TSource> source, IDictionary<string, object> parameters)
-        {
-            return Mapper.ProjectTo<TDestination>(source, parameters);
+            return Mapper.ProjectTo<TOut>(source);
         }
     }
 }

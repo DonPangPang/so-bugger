@@ -1,4 +1,5 @@
-﻿using SoBugger.Domain.Base;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using SoBugger.Domain.Base;
 using SoBugger.Domain.Platform;
 using SoBugger.Shared.Enums;
 
@@ -35,10 +36,10 @@ public class Bug : EntityBase, ISoftDelted, IDisabled, ICreatored, IModifyer
     public Guid? BugResultId { get; set; }
     public BugResult? BugResult { get; set; }
 
+    [ForeignKey(nameof(BugDetail))]
     public Guid BugDetailId { get; set; }
-    public BugDetail? BugDetail { get; set; }
 
-    public ICollection<BugHistory> BugHistories { get; set; } = new List<BugHistory>();
+    public BugDetail? BugDetail { get; set; }
 
     /// <summary>
     /// 项目需求

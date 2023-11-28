@@ -1,4 +1,5 @@
-﻿using SoBugger.Domain.Base;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using SoBugger.Domain.Base;
 using SoBugger.Shared.Enums;
 
 namespace SoBugger.Domain.Platform;
@@ -15,12 +16,14 @@ public class User : EntityBase, IModifyer, IDisabled, ISoftDelted
 
     public Gender Gender { get; set; } = Gender.None;
 
+    [ForeignKey(nameof(Avatar))]
     public Guid? AvatarId { get; set; }
-    public FileResource? Avatar { get; set; }
+
+    public Avatar? Avatar { get; set; }
 
     public UserAccess UserAccess { get; set; } = UserAccess.User;
 
-    public ICollection<Role> Roles { get; set; } = new List<Role>();
+    public ICollection<Role>? Roles { get; set; } = new List<Role>();
 
     public Guid? ModifyerId { get; set; }
     public User? Modifyer { get; set; }

@@ -1,4 +1,7 @@
-﻿namespace SoBugger.Domain.Base;
+﻿using SoBugger.Domain.Platform;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SoBugger.Domain.Base;
 
 public interface IEntity
 {
@@ -22,6 +25,7 @@ public interface IDisabled
 
 public interface ICreatored
 {
+    [ForeignKey(nameof(User))]
     public Guid CreatorId { get; set; }
 
     public DateTime CreatedAt { get; set; }
@@ -29,6 +33,7 @@ public interface ICreatored
 
 public interface IModifyer
 {
+    [ForeignKey(nameof(User))]
     public Guid? ModifyerId { get; set; }
 
     public DateTime? ModifiedAt { get; set; }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SoBugger.Domain.Platform;
 
-public class Role : EntityBase, IModifyer, ISoftDelted
+public class Role : EntityBase, IDisabled, ISoftDelted
 {
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
@@ -30,10 +30,14 @@ public class Role : EntityBase, IModifyer, ISoftDelted
         }
     }
 
-    public ICollection<User> Users { get; set; } = new List<User>();
+    public ICollection<User>? Users { get; set; } = new List<User>();
 
-    public Guid? ModifyerId { get; set; }
-    public User? Modifyer { get; set; }
     public DateTime? ModifiedAt { get; set; }
     public bool Deleted { get; set; } = false;
+
+    public bool Disabled
+    {
+        get;
+        set;
+    } = false;
 }

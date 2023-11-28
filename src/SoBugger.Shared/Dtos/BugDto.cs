@@ -38,8 +38,6 @@ public record BugDto : ViewModel
     public Guid BugDetailId { get; set; }
     public BugDetailDto? BugDetail { get; set; }
 
-    public List<BugHistoryDto> BugHistories { get; set; } = new List<BugHistoryDto>();
-
     /// <summary>
     /// 项目需求
     /// </summary>

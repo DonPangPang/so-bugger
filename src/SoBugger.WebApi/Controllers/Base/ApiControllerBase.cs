@@ -13,33 +13,18 @@ public class ApiControllerBase : ControllerBase
 {
 }
 
-[ApiController]
-[Route("api/[controller]")]
-public class ApiControllerBase<TEntity, TViewModel, TParameter> : ApiControllerBase
+public abstract class ApiControllerBase<TEntity, TViewModel, TParameter>(IUnitOfWork unitOfWork) : ApiControllerBase
     where TEntity : class, IEntity, new()
     where TViewModel : class, IViewModel, new()
     where TParameter : class, IParameter
 {
-    private readonly IUnitOfWork _unitOfWork;
-
-    public ApiControllerBase(IUnitOfWork unitOfWork)
-    {
-        _unitOfWork = unitOfWork;
-    }
-
     [HttpGet]
-    public async Task<IActionResult> GetList(TParameter parameters)
-    {
-        var res = await _unitOfWork.Query<TEntity>()
-            .MapTo<TViewModel>().QueryAsync(parameters);
-
-        return Ok(res);
-    }
+    public abstract Task<IActionResult> GetList(TParameter parameters);
 
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Get(Guid id)
     {
-        var res = await _unitOfWork.Query<TEntity>()
+        var res = await unitOfWork.Query<TEntity>()
             .MapTo<TViewModel>().FirstOrDefaultAsync(x => x.Id == id);
 
         return Ok(res);
@@ -50,9 +35,9 @@ public class ApiControllerBase<TEntity, TViewModel, TParameter> : ApiControllerB
     {
         var entity = dto.MapTo<TEntity>();
 
-        _unitOfWork.Set<TEntity>().Add(entity);
+        unitOfWork.Set<TEntity>().Add(entity);
 
-        var res = await _unitOfWork.CommitAsync();
+        var res = await unitOfWork.CommitAsync();
 
         return Ok(res);
     }
@@ -60,7 +45,7 @@ public class ApiControllerBase<TEntity, TViewModel, TParameter> : ApiControllerB
     [HttpPut]
     public async Task<IActionResult> Update(TViewModel dto)
     {
-        var entity = await _unitOfWork.Query<TEntity>().FirstOrDefaultAsync(x => x.Id == dto.Id);
+        var entity = await unitOfWork.Query<TEntity>().FirstOrDefaultAsync(x => x.Id == dto.Id);
 
         if (entity is null)
         {
@@ -69,9 +54,9 @@ public class ApiControllerBase<TEntity, TViewModel, TParameter> : ApiControllerB
 
         entity.Map(dto);
 
-        _unitOfWork.Set<TEntity>().Update(entity);
+        unitOfWork.Set<TEntity>().Update(entity);
 
-        var res = await _unitOfWork.CommitAsync();
+        var res = await unitOfWork.CommitAsync();
 
         return Ok(res);
     }
@@ -79,7 +64,7 @@ public class ApiControllerBase<TEntity, TViewModel, TParameter> : ApiControllerB
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var res = await _unitOfWork.Set<TEntity>().Where(x => x.Id == id).ExecuteDeleteAsync() > 0;
+        var res = await unitOfWork.Set<TEntity>().Where(x => x.Id == id).ExecuteDeleteAsync() > 0;
         return Ok(res);
     }
 }
