@@ -22,6 +22,7 @@ public class Project : EntityBase, ICreatored, ISoftDelted, IModifyer
 
     public ICollection<TodoAssignment> TodoAssignments { get; set; } = new List<TodoAssignment>();
 
+    public ICollection<Bug> Bugs { get; set; } = new List<Bug>();
 
     public Guid CreatorId { get; set; }
     public User? Creator { get; set; }
