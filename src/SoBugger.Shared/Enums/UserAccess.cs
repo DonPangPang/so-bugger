@@ -1,4 +1,4 @@
-﻿namespace SoBugger.Domain.Platform;
+﻿namespace SoBugger.Shared.Enums;
 
 public enum UserAccess
 {

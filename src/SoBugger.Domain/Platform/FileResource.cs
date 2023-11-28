@@ -14,4 +14,4 @@ public class FileResource : EntityBase, ICreatored
     public Guid CreatorId { get; set; }
     public User? Creator { get; set; }
     public DateTime CreatedAt { get; set; }
-}
+}

@@ -1,4 +1,5 @@
-﻿using SoBugger.Domain.Base;
+﻿using Microsoft.EntityFrameworkCore;
+using SoBugger.Domain.Base;
 using SoBugger.WebApi.Data;
 
 namespace SoBugger.WebApi.Repository;
@@ -20,5 +21,10 @@ public class UnitOfWork : IUnitOfWork
     public IQueryable<T> Query<T>() where T : class, IEntity
     {
         return _dbContext.Set<T>().AsQueryable();
+    }
+
+    public DbSet<T> Set<T>() where T : class, IEntity
+    {
+        return _dbContext.Set<T>();
     }
 }

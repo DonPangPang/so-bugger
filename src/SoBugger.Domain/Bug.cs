@@ -1,5 +1,6 @@
 ﻿using SoBugger.Domain.Base;
 using SoBugger.Domain.Platform;
+using SoBugger.Shared.Enums;
 
 namespace SoBugger.Domain;
 
@@ -26,7 +27,7 @@ public class Bug : EntityBase, ISoftDelted, IDisabled, ICreatored, IModifyer
     public ICollection<ProjectVersion> ProjectVersions { get; set; } = new List<ProjectVersion>();
 
     public Guid BugStateId { get; set; }
-    public BugState? BugState { get; set; }
+    public BugState BugState { get; set; } = BugState.None;
 
     public Guid? AssignUserId { get; set; }
     public User? AssignUser { get; set; }

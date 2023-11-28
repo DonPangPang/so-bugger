@@ -1,9 +1,9 @@
-﻿using SoBugger.Domain.Base;
+﻿using SoBugger.Shared.Base;
 using SoBugger.Shared.Enums;
 
-namespace SoBugger.Domain.Platform;
+namespace SoBugger.Shared.Dtos.Platform;
 
-public class User : EntityBase, IModifyer, IDisabled, ISoftDelted
+public record UserDto : ViewModel
 {
     public string Account { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
@@ -13,17 +13,15 @@ public class User : EntityBase, IModifyer, IDisabled, ISoftDelted
     public string? Email { get; set; }
     public string? Phone { get; set; }
 
-    public Gender Gender { get; set; } = Gender.None;
-
     public Guid? AvatarId { get; set; }
-    public FileResource? Avatar { get; set; }
+    public FileResourceDto? Avatar { get; set; }
 
     public UserAccess UserAccess { get; set; } = UserAccess.User;
 
-    public ICollection<Role> Roles { get; set; } = new List<Role>();
+    public ICollection<RoleDto> Roles { get; set; } = new List<RoleDto>();
 
     public Guid? ModifyerId { get; set; }
-    public User? Modifyer { get; set; }
+    public UserDto? Modifyer { get; set; }
     public DateTime? ModifiedAt { get; set; }
     public bool Disabled { get; set; } = false;
     public bool Deleted { get; set; } = false;

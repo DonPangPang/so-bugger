@@ -1,5 +1,6 @@
 ﻿using SoBugger.Domain.Base;
 using SoBugger.Domain.Platform;
+using SoBugger.Shared.Enums;
 
 namespace SoBugger.Domain;
 

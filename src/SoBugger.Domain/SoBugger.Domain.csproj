@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SoBugger.Common\SoBugger.Common.csproj" />
+    <ProjectReference Include="..\SoBugger.Shared\SoBugger.Shared.csproj" />
   </ItemGroup>
 
 </Project>
