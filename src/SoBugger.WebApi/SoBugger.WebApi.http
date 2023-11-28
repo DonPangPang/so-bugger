@@ -1,0 +1,6 @@
+@SoBugger.WebApi_HostAddress = http://localhost:5227
+
+GET {{SoBugger.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
