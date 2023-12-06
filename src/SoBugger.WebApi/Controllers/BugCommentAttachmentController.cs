@@ -1,16 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SoBugger.Domain;
 using SoBugger.Shared.Dtos;
 using SoBugger.Shared.Parameters;
 using SoBugger.WebApi.Controllers.Base;
+using SoBugger.WebApi.Extensions;
 using SoBugger.WebApi.Repository;
 
 namespace SoBugger.WebApi.Controllers;
 
 public class BugCommentAttachmentController(IUnitOfWork unitOfWork) : ApiControllerBase<BugCommentAttachment, BugCommentAttachmentDto, BugCommentAttachmentParameters>(unitOfWork)
 {
-    public override Task<IActionResult> GetList(BugCommentAttachmentParameters parameters)
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
+    public override async Task<IActionResult> GetList(BugCommentAttachmentParameters parameters)
     {
-        throw new NotImplementedException();
+        var result = await _unitOfWork.Query<BugCommentAttachment>().QueryAsync(parameters);
+
+        return Ok(result);
     }
 }
