@@ -1,0 +1,42 @@
+﻿@page "/login"
+@layout EmptyLayout
+@inject IToastService Toast
+
+<PageTitle>Login</PageTitle>
+
+<div class="container">
+    <div class="half-screen svg-container">
+        <iframe frameborder="0" scrolling="no" src="./loading.html" width="100%"
+            height="500px"></iframe>
+    </div>
+    <div class="half-screen">
+        <LoginComponent></LoginComponent>
+    </div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+        /* Add this line */
+    }
+
+    .half-screen {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .svg-container svg {
+        width: 50%;
+        height: auto;
+        max-height: 100%;
+        /* Add this line */
+    }
+</style>
+
+@code {
+
+}

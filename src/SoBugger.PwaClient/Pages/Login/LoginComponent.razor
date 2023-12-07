@@ -1,0 +1,96 @@
+@inject IToastService Toast
+@inject NavigationManager NavigationManager
+
+<div style="width:80%">
+    <SbTitle Style="margin-bottom:2rem;" Content="@SoBuggerConsts.AppName"
+        Size="2"></SbTitle>
+
+    <MTextField TValue="string" @bind-Value="username" Label="账号"
+        Placeholder="请输入账号" Outlined Dense>
+    </MTextField>
+    <MTextField TValue="string" @bind-Value="password"
+        AppendIcon="@(showPassword ? "mdi-eye" : "mdi-eye-off")"
+        Type="@(showPassword ? "text" : "password")" Label="密码"
+        Placeholder="请输入密码" OnAppendClick="()=>  showPassword = !showPassword"
+        Outlined Dense>
+    </MTextField>
+    <MButton Color="success" OnClick="HandleValidSubmitAsync" Style="width:100%"
+        Loading="loading">登录
+    </MButton>
+    <MDivider Height="60">
+        <MIcon Color="red" Left Style="line-height: inherit;">mdi-heart</MIcon>
+        <span style="font-size: 14px;color:grey;">其它方式</span>
+    </MDivider>
+    <MButton Color="warning" OnClick="HandleRegister" Style="width:100%">
+        <MIcon Left Dark>
+            mdi mdi-account-outline
+        </MIcon>
+        注册
+    </MButton>
+    <SbSpace>
+    </SbSpace>
+    <MButton Color="default" OnClick="HandleGithubRegister" Style="width:100%">
+        <MIcon Left Light>
+            mdi mdi-github
+        </MIcon>
+        Github
+    </MButton>
+</div>
+
+<style>
+    .title {
+        margin-bottom: 2rem;
+    }
+</style>
+
+@code {
+    string? username = "admin";
+    string? password = "admin123@";
+
+    bool showPassword = false;
+
+    bool loading = false;
+
+    private async Task HandleValidSubmitAsync()
+    {
+        loading = true;
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            await Toast.ErrorAsync(SoBuggerConsts.Account.AccountNotEmpty);
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            await Toast.ErrorAsync(SoBuggerConsts.Account.PasswordNotEmpty);
+            return;
+        }
+
+        if (password.Length < SoBuggerConsts.Account.PasswordLenght)
+        {
+            await Toast.ErrorAsync(SoBuggerConsts.Account.PasswordLenghtNotValid);
+            return;
+        }
+
+        await HandleLoginAsync(username, password);
+    }
+
+    async Task HandleLoginAsync(string username, string password)
+    {
+        await Task.Delay(2000);
+        NavigationManager.NavigateTo(SoBuggerConsts.PageMap.Home);
+        loading = false;
+    }
+
+    async Task HandleRegister()
+    {
+        await Toast.WarningAsync("暂未开放");
+        return;
+    }
+
+    async Task HandleGithubRegister()
+    {
+        await Toast.WarningAsync("暂未开放");
+        return;
+    }
+}

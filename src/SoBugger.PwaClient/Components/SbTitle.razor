@@ -1,0 +1,32 @@
+<div style="@Style" class="sb-title @Class">@Content</div>
+
+<style>
+    .sb-title {
+        text-align: center;
+        font-size: @($"{Size}rem");
+        font-weight: @Weight;
+
+        user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public string Content { get; set; } = string.Empty;
+
+    [Parameter]
+    public float Size { get; set; } = 1;
+
+    [Parameter]
+    public string Weight { get; set; } = "normal";
+
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Style { get; set; } = string.Empty;
+}

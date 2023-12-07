@@ -1,41 +1,27 @@
 ﻿@inherits LayoutComponentBase
 
 <MApp>
-    <MAppBar App>
-        <MAppBarNavIcon @onclick="() => _drawer = !_drawer"></MAppBarNavIcon>
-        <MToolbarTitle>MASA Blazor</MToolbarTitle>
+    <MAppBar App Fixed>
+        <MAppBarNavIcon>
+            <iframe frameborder="0" scrolling="no" src="./loading.html"
+                width="100%" height="60px"></iframe>
+        </MAppBarNavIcon>
+        <MToolbarTitle>@SoBuggerConsts.AppName</MToolbarTitle>
+        <div class="sb-menu">
+            <MButton Text>@SoBuggerConsts.MenuMap.Project</MButton>
+            <MButton Text>@SoBuggerConsts.MenuMap.Bug</MButton>
+            <MButton Text>@SoBuggerConsts.MenuMap.Statistics</MButton>
+            |
+            <MButton Text>@SoBuggerConsts.MenuMap.Todo</MButton>
+        </div>
         <MSpacer></MSpacer>
-        <MButton Text Color="primary" Target="_blank" Href="https://docs.masastack.com/blazor/introduction/why-masa-blazor">About</MButton>
+        <MButton class="mx-2" Fab Color="primary" Target="_blank" Dark Small
+            Href="https://docs.masastack.com/blazor/introduction/why-masa-blazor">
+            <MIcon>
+                mdi-github
+            </MIcon>
+        </MButton>
     </MAppBar>
-
-    <MNavigationDrawer App @bind-Value="_drawer">
-        <MList Nav Routable>
-            <MListItem Href="/" ActiveClass="primary--text">
-                <MListItemIcon>
-                    <MIcon>mdi-home</MIcon>
-                </MListItemIcon>
-                <MListItemContent>
-                    <MListItemTitle>Home</MListItemTitle>
-                </MListItemContent>
-            </MListItem>
-            <MListItem Href="/counter" ActiveClass="primary--text">
-                <MListItemIcon>
-                    <MIcon>mdi-plus</MIcon>
-                </MListItemIcon>
-                <MListItemContent>
-                    <MListItemTitle>Counter</MListItemTitle>
-                </MListItemContent>
-            </MListItem>
-            <MListItem Href="/fetchdata" ActiveClass="primary--text">
-                <MListItemIcon>
-                    <MIcon>mdi-list-box</MIcon>
-                </MListItemIcon>
-                <MListItemContent>
-                    <MListItemTitle>Fetch data</MListItemTitle>
-                </MListItemContent>
-            </MListItem>
-        </MList>
-    </MNavigationDrawer>
 
     <MMain>
         <MContainer Fluid>
@@ -45,6 +31,14 @@
         </MContainer>
     </MMain>
 </MApp>
+
+<style>
+    .sb-menu {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+    }
+</style>
 
 @code {
 

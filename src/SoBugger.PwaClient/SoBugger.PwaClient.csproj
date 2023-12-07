@@ -17,4 +17,15 @@
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SoBugger.Common\SoBugger.Common.csproj" />
+    <ProjectReference Include="..\SoBugger.Shared\SoBugger.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Bugs\" />
+    <Folder Include="Pages\Login\" />
+    <Folder Include="Pages\Projects\" />
+  </ItemGroup>
+
 </Project>

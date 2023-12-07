@@ -3,28 +3,33 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>SoBugger.PwaClient</title>
     <base href="/" />
     <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+
     <link rel="icon" type="image/png" href="favicon.png" />
     <link href="SoBugger.PwaClient.styles.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
-    <link href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
+    <link
+        href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css"
+        rel="stylesheet">
     <!-- <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet"> -->
     <!-- <link href="https://cdn.masastack.com/npm/fontawesome/v6.4.0/css/all.css" rel="stylesheet"> -->
 </head>
 
 <body>
     <div id="app">
-        <svg class="loading-progress">
-            <circle r="40%" cx="50%" cy="50%" />
-            <circle r="40%" cx="50%" cy="50%" />
-        </svg>
-        <div class="loading-progress-text"></div>
+        <div class="sb-loading">
+            <iframe frameborder="0" scrolling="no" src="loading.html"
+                width="100%" height="500px"></iframe>
+            <div class="loading-progress-text">loading...</div>
+        </div>
     </div>
 
     <div id="blazor-error-ui">
