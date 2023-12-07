@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoBugger.Domain", "src\SoBu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoBugger.Common", "src\SoBugger.Common\SoBugger.Common.csproj", "{E933E1B4-0707-407D-9A7B-E24952643D1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoBugger.WebApi", "src\SoBugger.WebApi\SoBugger.WebApi.csproj", "{AB6E6557-8935-4438-A3B8-92FBFCCD5A72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoBugger.WebApi", "src\SoBugger.WebApi\SoBugger.WebApi.csproj", "{AB6E6557-8935-4438-A3B8-92FBFCCD5A72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoBugger.PwaClient", "src\SoBugger.PwaClient\SoBugger.PwaClient.csproj", "{41477421-9372-480D-9A91-E584253ADC81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{AB6E6557-8935-4438-A3B8-92FBFCCD5A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB6E6557-8935-4438-A3B8-92FBFCCD5A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB6E6557-8935-4438-A3B8-92FBFCCD5A72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41477421-9372-480D-9A91-E584253ADC81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41477421-9372-480D-9A91-E584253ADC81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41477421-9372-480D-9A91-E584253ADC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41477421-9372-480D-9A91-E584253ADC81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{02A424DA-7F13-4DA5-AF1C-1356A1EB46F6} = {A5747A7F-7289-439A-BBC0-2B1074161DA1}
 		{E933E1B4-0707-407D-9A7B-E24952643D1B} = {A5747A7F-7289-439A-BBC0-2B1074161DA1}
 		{AB6E6557-8935-4438-A3B8-92FBFCCD5A72} = {A5747A7F-7289-439A-BBC0-2B1074161DA1}
+		{41477421-9372-480D-9A91-E584253ADC81} = {A5747A7F-7289-439A-BBC0-2B1074161DA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {274F1972-A6A7-4183-8D31-A3EF4FEE3F34}
