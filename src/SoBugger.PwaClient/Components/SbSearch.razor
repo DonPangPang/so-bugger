@@ -1,0 +1,41 @@
+<MDialog @bind-Value="ShowModal" Width="500" OnCancel="() => ShowModal = false"
+    Class="rounded-xl">
+    <ChildContent>
+        <MCard Class="rounded-xl">
+            <MCardTitle>
+                <MTextField TValue="string" style="" AppendIcon="mdi-magnify"
+                    Label="搜索" Rounded Outlined Dense>
+                </MTextField>
+            </MCardTitle>
+            <MCardText>
+                <MList>
+                    @foreach (var item in Enumerable.Range(1, 10))
+                    {
+                        <MListItem>
+                            <MListItemIcon>
+                                <MIcon>
+                                    @item
+                                </MIcon>
+                            </MListItemIcon>
+                            <MListItemContent>
+                                <MListItemTitle>@item</MListItemTitle>
+                            </MListItemContent>
+                        </MListItem>
+                    }
+                </MList>
+            </MCardText>
+        </MCard>
+    </ChildContent>
+</MDialog>
+
+<style>
+
+</style>
+
+@code {
+    [Parameter]
+    public bool ShowModal { get; set; } = false;
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+}

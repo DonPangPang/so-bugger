@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
 
 <MApp>
     <MAppBar App Fixed>
@@ -8,13 +9,31 @@
         </MAppBarNavIcon>
         <MToolbarTitle>@SoBuggerConsts.AppName</MToolbarTitle>
         <div class="sb-menu">
-            <MButton Text>@SoBuggerConsts.MenuMap.Project</MButton>
-            <MButton Text>@SoBuggerConsts.MenuMap.Bug</MButton>
-            <MButton Text>@SoBuggerConsts.MenuMap.Statistics</MButton>
+            <MButton Text
+                OnClick="()=>NavigationManager.NavigateTo(SoBuggerConsts.PageMap.Home)">
+                @SoBuggerConsts.MenuMap.Home</MButton>
+            <MButton Text
+                OnClick="()=>NavigationManager.NavigateTo(SoBuggerConsts.PageMap.Project)">
+                @SoBuggerConsts.MenuMap.Project</MButton>
+            <MButton Text
+                OnClick="()=>NavigationManager.NavigateTo(SoBuggerConsts.PageMap.Bug)">
+                @SoBuggerConsts.MenuMap.Bug</MButton>
+            <MButton Text
+                OnClick="()=>NavigationManager.NavigateTo(SoBuggerConsts.PageMap.Statistics)">
+                @SoBuggerConsts.MenuMap.Statistics</MButton>
             |
-            <MButton Text>@SoBuggerConsts.MenuMap.Todo</MButton>
+            <MButton Text
+                OnClick="()=>NavigationManager.NavigateTo(SoBuggerConsts.PageMap.Todo)">
+                @SoBuggerConsts.MenuMap.Todo</MButton>
         </div>
         <MSpacer></MSpacer>
+        <div>
+            <MTextField TValue="string" @bind-Value="search"
+                style="width: 100px;margin-top:25px" AppendIcon="mdi-magnify"
+                Label="搜索" Rounded OnAppendClick="()=>{showSearch = true;}"
+                OnClick="()=>{showSearch = true;}" Outlined Dense>
+            </MTextField>
+        </div>
         <MButton class="mx-2" Fab Color="primary" Target="_blank" Dark Small
             Href="https://docs.masastack.com/blazor/introduction/why-masa-blazor">
             <MIcon>
@@ -22,6 +41,9 @@
             </MIcon>
         </MButton>
     </MAppBar>
+
+    <SbSearch ShowModal="showSearch" OnCancel="()=> showSearch=false">
+    </SbSearch>
 
     <MMain>
         <MContainer Fluid>
@@ -39,9 +61,7 @@
         text-align: center;
     }
 </style>
-
 @code {
-
-    private bool? _drawer;
-
+    string search = string.Empty;
+    bool showSearch = false;
 }

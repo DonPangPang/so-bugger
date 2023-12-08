@@ -1,0 +1,187 @@
+@page "/register"
+@layout EmptyLayout
+@inject IToastService Toast
+@inject NavigationManager NavigationManager
+<PageTitle>Register</PageTitle>
+
+<div class="sb-center-panel">
+    <MStepper Value="_step" Width="800" class="rounded-lg">
+        <MStepperHeader>
+            <MStepperStep Step="1" Complete="_step>1">
+                账号密码
+            </MStepperStep>
+            <MDivider></MDivider>
+            <MStepperStep Step="2" Complete="_step>2">
+                完善个人信息
+            </MStepperStep>
+            <MDivider></MDivider>
+            <MStepperStep Step="3">
+                验证邮箱
+            </MStepperStep>
+        </MStepperHeader>
+
+        <MStepperItems>
+            <MStepperContent Step="1">
+                <MCard Class="mb-12" Height="Height" Elevation="0">
+                    <SbSpace></SbSpace>
+                    <MTextField Label="账号" @bind-Value="user.Account" Outlined
+                        Required>
+                    </MTextField>
+                    <MTextField Label="密码" Type="password"
+                        @bind-Value="user.Password" Outlined Required>
+                    </MTextField>
+                    <MTextField Label="确认密码" Type="password"
+                        @bind-Value="verifyPassword" Outlined
+                        OnInput="(string value)=>HandleVerifyPasswordChange(value)"
+                        Error="@HasError" Required>
+                    </MTextField>
+                </MCard>
+                <MButton Color="primary" OnClick="HandleNextStep">下一步
+                </MButton>
+            </MStepperContent>
+            <MStepperContent Step="2">
+                <MCard Class="mb-12" Height="Height" Elevation="0">
+                    <SbSpace></SbSpace>
+                    <MTextField Label="名称" @bind-Value="user.Name" Outlined
+                        Required>
+                    </MTextField>
+                    <MTextField Label="邮箱" @bind-Value="user.Email" Outlined
+                        Required
+                        Rules="new List<Func<string, StringBoolean>>{_emailRule}">
+                    </MTextField>
+                    <MTextarea Label="简述" @bind-Value="user.Description"
+                        Outlined>
+                    </MTextarea>
+                </MCard>
+                <MButton Color="primary" OnClick="HandleNextStep">下一步
+                </MButton>
+                <MButton Text OnClick="HandlePreviousStep">上一步</MButton>
+            </MStepperContent>
+            <MStepperContent Step="3">
+                <MCard Class="mb-12" Height="Height" Elevation="0">
+                    <SbSpace H="6"></SbSpace>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem;">
+                            @(user.Email.HideSensitiveInformation())
+                            <MIcon Color="success">mdi mdi-check-circle</MIcon>
+                        </div>
+                        <SbSpace H="2"></SbSpace>
+                        <MButton Color="primary" Large style="width: 20rem;">
+                            发送验证码
+                        </MButton>
+                        <SbSpace H="2"></SbSpace>
+                        <div class="ma-auto position-relative"
+                            style="width: 20rem;">
+                            <MOtpInput @bind-Value="_otp"
+                                OnFinish="HandleOtpOnFinished"></MOtpInput>
+                        </div>
+                    </div>
+                </MCard>
+                <MButton Text OnClick="HandlePreviousStep">上一步</MButton>
+            </MStepperContent>
+        </MStepperItems>
+    </MStepper>
+</div>
+
+
+<style>
+    .sb-center-panel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+</style>
+
+@code {
+    private int _step = 3;
+    const int Height = 400;
+    UserDto user = new UserDto();
+    string verifyPassword = string.Empty;
+    string _otp = string.Empty;
+
+    private Func<string, StringBoolean> _emailRule = value =>
+    System.Text.RegularExpressions.Regex.Match(value,
+    "^[\\w-]+@[\\w-]+\\.(com|net|org|edu|mil|tv|biz|info)$").Success ? true :
+    SoBuggerConsts.Account.EmailNotValid;
+    async Task HandleNextStep()
+    {
+        switch (_step)
+        {
+            case 1:
+                #region Step1
+                if (string.IsNullOrWhiteSpace(user.Account))
+                {
+                    await Toast.WarningAsync(SoBuggerConsts.Account.AccountNotEmpty);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(user.Password))
+                {
+                    await Toast.WarningAsync(SoBuggerConsts.Account.PasswordNotEmpty);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(verifyPassword))
+                {
+                    await Toast.WarningAsync(SoBuggerConsts.Account.VerifyPasswordNotEmpty);
+                    return;
+                }
+
+                if (HasError)
+                {
+                    await Toast.WarningAsync(SoBuggerConsts.Account.VerifyPasswordNotEqual);
+                    return;
+                }
+                #endregion
+                break;
+            case 2:
+                #region Step2
+                if (string.IsNullOrWhiteSpace(user.Name))
+                {
+                    await Toast.WarningAsync(SoBuggerConsts.Account.NameNotEmpty);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(user.Email))
+                {
+                    await Toast.WarningAsync(SoBuggerConsts.Account.EmailNotEmpty);
+                    return;
+                }
+                #endregion
+                break;
+            default:
+                break;
+        }
+        _step++;
+    }
+
+    void HandlePreviousStep()
+    {
+        _step--;
+    }
+
+    bool HasError = false;
+    void HandleVerifyPasswordChange(string value)
+    {
+        if (user.Password != verifyPassword)
+        {
+            HasError = true;
+        }
+        else
+        {
+            HasError = false;
+        }
+
+        Console.WriteLine(value);
+    }
+
+    async Task HandleOtpOnFinished(string value)
+    {
+        await Toast.SuccessAsync(value);
+
+        await Task.Delay(1000);
+
+        NavigationManager.NavigateTo(SoBuggerConsts.PageMap.Login);
+    }
+}

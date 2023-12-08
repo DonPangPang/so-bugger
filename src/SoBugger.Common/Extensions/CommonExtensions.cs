@@ -8,6 +8,35 @@ public static class CommonExtensions
     {
         return string.IsNullOrWhiteSpace(value);
     }
+
+    public static string HideSensitiveInformation(this string value)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return value;
+        }
+
+        if (value.Contains("@"))
+        {
+            // 隐藏邮箱
+            int atIndex = value.IndexOf("@");
+            string username = value.Substring(0, atIndex);
+            string domain = value.Substring(atIndex + 1);
+            int hideLength = username.Length > 2 ? username.Length - 2 : 0;
+            string hiddenUsername = new string('*', hideLength) + username.Substring(hideLength);
+            return hiddenUsername + "@" + domain;
+        }
+        else if (value.Length >= 11)
+        {
+            // 隐藏手机号
+            string hiddenValue = value.Substring(0, 3) + new string('*', value.Length - 7) + value.Substring(value.Length - 4);
+            return hiddenValue;
+        }
+        else
+        {
+            return value;
+        }
+    }
 }
 
 public static class ThrowHelper

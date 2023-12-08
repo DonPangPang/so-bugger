@@ -26,6 +26,7 @@
     <Folder Include="Pages\Bugs\" />
     <Folder Include="Pages\Login\" />
     <Folder Include="Pages\Projects\" />
+    <Folder Include="Pages\Register\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,54 @@
+<MCard Height="200">
+    <MCardText>
+        <MRow>
+            <MCol Sm="3">
+                <MECharts Option="_option"></MECharts>
+            </MCol>
+            <MCol Sm="3">
+                <MECharts Option="_option"></MECharts>
+            </MCol>
+            <MCol Sm="3">
+                <MECharts Option="_option"></MECharts>
+            </MCol>
+            <MCol Sm="3">
+                <MECharts Option="_option"></MECharts>
+            </MCol>
+        </MRow>
+    </MCardText>
+</MCard>
+
+<style>
+
+</style>
+
+@code {
+    object _option = GenOption(MakeRandomData());
+
+    record PieDataItem(string Name, int Value);
+
+    private static object GenOption(IEnumerable<PieDataItem> data)
+    {
+        return new
+        {
+            Title = new
+            {
+                Text = "Pie Chart",
+                Subtext = "Sample Pie Chart"
+            },
+            Series = new[]
+            {
+                new
+                {
+                    Radius = new[] { "0", "50%" },
+                    Type = "pie",
+                    Data = data
+                }
+            }
+        };
+    }
+
+    private static IEnumerable<PieDataItem> MakeRandomData()
+    {
+        return new[] { "A", "B", "C" }.Select(item => new PieDataItem(item, Random.Shared.Next(10, 99)));
+    }
+}

@@ -15,10 +15,16 @@ public class SoBuggerConsts
         public const string Home = "/";
         public const string Login = "/login";
         public const string Register = "/register";
+
+        public const string Project = "/project";
+        public const string Bug = "/bug";
+        public const string Todo = "/todo";
+        public const string Statistics = "/statistics";
     }
 
     public class MenuMap
     {
+        public const string Home = "工作台";
         public const string Project = "项目";
         public const string Bug = "测试";
         public const string Todo = "Todo";
@@ -44,5 +50,15 @@ public class SoBuggerConsts
         public const string PasswordNotValid = "Password not valid";
 
         public const string PasswordLenghtNotValid = "Password lenght not valid";
+
+        public const string VerifyPasswordNotEmpty = "Verify password not empty";
+
+        public const string VerifyPasswordNotEqual = "Verify password not equal";
+
+        public const string NameNotEmpty = "Name not empty";
+
+        public const string EmailNotEmpty = "Email not empty";
+
+        public const string EmailNotValid = "Email not valid";
     }
 }

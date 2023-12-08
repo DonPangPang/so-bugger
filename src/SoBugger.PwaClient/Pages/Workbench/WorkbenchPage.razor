@@ -1,0 +1,30 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<SbSpace></SbSpace>
+
+<MRow class="scrollable-content">
+    <MCol Sm="9">
+        <OverviewCard></OverviewCard>
+        <SbSpace></SbSpace>
+        <ProjectCard></ProjectCard>
+    </MCol>
+    <MCol Sm="3">
+        <TodoCard></TodoCard>
+        <SbSpace></SbSpace>
+        <RecentCard></RecentCard>
+    </MCol>
+</MRow>
+<style>
+    .scrollable-content {
+        height: 95vh;
+        /* 或者你需要的高度 */
+        overflow-y: auto;
+        /* 当内容超出高度时显示垂直滚动条 */
+    }
+</style>
+
+@code {
+
+}
